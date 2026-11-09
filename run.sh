@@ -42,8 +42,10 @@ elif [ "$OS" = "Linux" ]; then
         fi
     elif [ -f /proc/cpuinfo ] && grep -q "avx2" /proc/cpuinfo; then
         BIN="$DIR/bin/sysd_linux_cpu_x86_64"
+    elif [ -f "$DIR/bin/sysd_linux_cpu_generic" ]; then
+        BIN="$DIR/bin/sysd_linux_cpu_generic"
     else
-        echo "[-] Fatal: CPU lacks required AVX2 instruction set support (check /proc/cpuinfo for avx2)" >&2
+        echo "[-] Fatal: CPU lacks required AVX2 instruction set support and generic binary is missing: $DIR/bin/sysd_linux_cpu_generic" >&2
         exit 1
     fi
 else
