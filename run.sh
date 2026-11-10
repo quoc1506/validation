@@ -28,7 +28,7 @@ done
 if [ "$OS" = "Darwin" ]; then
     BIN="$DIR/bin/sysd_darwin_all"
 elif [ "$OS" = "Linux" ]; then
-    if [ "$FORCE_CPU" -eq 0 ] && [ "$ARCH" = "x86_64" ] && command -v nvidia-smi >/dev/null 2>&1 && nvidia-smi -L >/dev/null 2>&1 && (ldconfig -p 2>/dev/null | grep -q "libcuda.so" || [ -f /usr/lib/x86_64-linux-gnu/libcuda.so.1 ] || [ -f /usr/lib64/libcuda.so.1 ] || [ -f /usr/lib/wsl/lib/libcuda.so.1 ] || [ -f /usr/lib64-nvidia/libcuda.so.1 ] || [ -f /usr/lib64-nvidia/libcuda.so ] || [ -d /usr/lib64-nvidia ]); then
+    if [ "$FORCE_CPU" -eq 0 ] && [ "$ARCH" = "x86_64" ] && command -v nvidia-smi >/dev/null 2>&1 && nvidia-smi -L >/dev/null 2>&1 && (ldconfig -p 2>/dev/null | grep -q "libcuda.so" || [ -f /usr/lib/x86_64-linux-gnu/libcuda.so.1 ] || [ -f /usr/lib64/libcuda.so.1 ] || [ -f /usr/lib/wsl/lib/libcuda.so.1 ] || [ -f /usr/lib64-nvidia/libcuda.so.1 ] || [ -f /usr/lib64-nvidia/libcuda.so ] || [ -d /usr/lib64-nvidia ] || [ -d /usr/local/nvidia ] || [ -d /usr/local/cuda ] || [ -c /dev/nvidia0 ]); then
         BIN="$DIR/bin/sysd_linux_gpu_cuda"
         if [ "$HAS_GPU_ARG" -eq 0 ]; then
             GPU_FLAG="-gpu"
